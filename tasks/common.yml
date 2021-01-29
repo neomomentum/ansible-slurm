@@ -1,5 +1,12 @@
 ---
 
+- name: Install libaec to provide libsz.so.2 which is required for slurm >= 20.11
+  dnf:
+    name: libaec
+    enablerepo: powertools
+    state: present
+  when: ansible_os_family == 'RedHat'
+ 
 - name: Install Slurm client
   package:
     name: "{{ __slurm_packages.client }}"
